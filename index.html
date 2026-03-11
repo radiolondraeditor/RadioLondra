@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Radio Londra — Diritto, politica e pensiero critico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0f0f;
+      --paper: #f4f0e8;
+      --cream: #ede8dc;
+      --accent: #c0392b;
+      --accent2: #1a1a2e;
+      --gray: #888;
+      --light-gray: #d8d3c8;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lora', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .top-bar a { color: var(--light-gray); text-decoration: none; transition: color .2s; }
+    .top-bar a:hover { color: var(--accent); }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 3px double var(--ink);
+      padding: 36px 40px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: 'RADIO LONDRA';
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: var(--light-gray);
+      opacity: 0.4;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .site-title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 10vw, 110px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      color: var(--ink);
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .site-title span {
+      color: var(--accent);
+    }
+
+    .site-tagline {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 14px;
+      animation: fadeDown 0.8s ease 0.15s both;
+    }
+
+    .header-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      animation: fadeDown 0.8s ease 0.25s both;
+    }
+
+    .header-rule::before, .header-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--light-gray);
+    }
+
+    .header-rule span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.15em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 16px 22px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: all .2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .nav-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 40px 60px;
+    }
+
+    /* ── HERO ARTICLE ── */
+    .hero-article {
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      max-width: 760px;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .article-category {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .hero-title em { font-style: italic; color: var(--accent); }
+
+    .hero-excerpt {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .read-more {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+      transition: opacity .2s;
+    }
+    .read-more:hover { opacity: 0.6; }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--light-gray);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray);
+    }
+
+    /* ── SECTION HEADER (per uso futuro) ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--light-gray);
+    }
+
+    /* ── MANIFESTO BAND ── */
+    .manifesto-band {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 48px 56px;
+      margin: 0 -40px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifesto-band::before {
+      content: '""';
+      position: absolute;
+      top: -20px;
+      left: 40px;
+      font-family: var(--font-display);
+      font-size: 180px;
+      color: var(--accent);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    .manifesto-band blockquote {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-style: italic;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--paper);
+      position: relative;
+      z-index: 1;
+    }
+
+    .manifesto-band cite {
+      display: block;
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    /* ── CHI SONO ── */
+    .chi-sono-section {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      border-top: 2px solid var(--ink);
+      padding-top: 40px;
+      margin-bottom: 60px;
+      animation: fadeUp 0.7s ease 0.6s both;
+    }
+
+    .chi-sono-label h2 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .chi-sono-label .accent-line {
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      margin-top: 14px;
+    }
+
+    .chi-sono-content p {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .chi-sono-content p:first-child::first-letter {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 900;
+      float: left;
+      line-height: 0.8;
+      margin: 4px 8px 0 0;
+      color: var(--accent);
+    }
+
+    .chi-sono-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      background: transparent;
+      transition: all .2s;
+    }
+
+    .tag:hover { background: var(--ink); color: var(--paper); }
+
+    /* ── CONTATTI ── */
+    .contatti-section {
+      border-top: 2px solid var(--ink);
+      padding-top: 40px;
+      margin-bottom: 60px;
+      animation: fadeUp 0.7s ease 0.7s both;
+    }
+
+    .contatti-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 28px;
+    }
+
+    .contatti-info p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .contact-links {
+      list-style: none;
+    }
+
+    .contact-links li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .contact-links a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .contact-links a:hover { color: var(--accent); }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .form-group label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .form-group input, .form-group textarea {
+      background: var(--cream);
+      border: 1px solid var(--light-gray);
+      border-bottom: 2px solid var(--ink);
+      padding: 10px 14px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      align-self: flex-start;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 12px 28px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .btn-submit:hover { background: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 32px 40px;
+      text-align: center;
+      border-top: 3px solid var(--accent);
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .footer-title span { color: var(--accent); }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      header, nav, main, footer { padding-left: 20px; padding-right: 20px; }
+      .chi-sono-section { grid-template-columns: 1fr; }
+      .contatti-grid { grid-template-columns: 1fr; }
+      .manifesto-band { padding: 36px 24px; margin: 0 -20px 40px; }
+      .top-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span id="live-date"></span>
+    <span>Radio Londra — Diritto, politica e pensiero critico</span>
+    <span>Italia</span>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <h1 class="site-title">Radio<span> Londra</span></h1>
+      <p class="site-tagline">Diritto &nbsp;·&nbsp; Politica &nbsp;·&nbsp; Pensiero Critico</p>
+      <div class="header-rule">
+        <span>Est. 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <ul class="nav-links">
+        <li><a href="#articoli" class="active">Articoli</a></li>
+        <li><a href="#chi-sono">Chi sono</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+      <span class="nav-date" id="nav-date"></span>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <section id="articoli">
+      <div class="hero-article">
+        <span class="article-category">Riforma della Giustizia</span>
+        <h2 class="hero-title">La separazione delle carriere: <em>rivoluzione</em> o propaganda?</h2>
+        <p class="hero-excerpt">
+          Il disegno di legge costituzionale sulla separazione delle carriere tra giudici e pubblici ministeri è ormai legge. 
+          Ma cosa cambia davvero per il cittadino? Dietro la retorica dell'efficienza si nasconde un riassetto profondo degli equilibri tra i poteri dello Stato.
+          Un'analisi senza filtri, con gli occhi di chi conosce i meccanismi dall'interno.
+        </p>
+        <a href="articolo-esempio.html" class="read-more">Continua a leggere →</a>
+        <div class="hero-meta">
+          <span>10 Marzo 2026</span>
+          <span>·</span>
+          <span>8 min di lettura</span>
+          <span>·</span>
+          <span>Giustizia</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANIFESTO BAND -->
+    <div class="manifesto-band">
+      <blockquote>
+        "Un popolo che non conosce le proprie leggi non è libero: è soltanto ingenuo."
+        <cite>— Radio Londra</cite>
+      </blockquote>
+    </div>
+
+    <!-- CHI SONO -->
+    <section id="chi-sono" class="chi-sono-section">
+      <div class="chi-sono-label">
+        <h2>Chi<br>sono</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="chi-sono-content">
+        <p>
+          Questo blog nasce dall'esigenza di dare voce a chi lavora ogni giorno a contatto con il diritto, le istituzioni e i meccanismi del potere. Non sono un giornalista: sono qualcuno che ha visto le cose dall'interno, e che non riesce più a tacere.
+        </p>
+        <p>
+          Radio Londra è un luogo di riflessione e di critica. Qui non troverete dichiarazioni di parte né comunicati stampa rielaborati. Troverete analisi, domande scomode, e il tentativo onesto di spiegare cosa sta succedendo davvero — a partire dai testi di legge, dalle sentenze, dai regolamenti — con un linguaggio accessibile a tutti.
+        </p>
+        <p>
+          Perché la democrazia funziona solo quando i cittadini capiscono le regole del gioco.
+        </p>
+        <div class="chi-sono-tags">
+          <span class="tag">Diritto</span>
+          <span class="tag">Politica</span>
+          <span class="tag">Riforma della Giustizia</span>
+          <span class="tag">Costituzione</span>
+          <span class="tag">Libertà di stampa</span>
+          <span class="tag">Pensiero critico</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contatti" class="contatti-section">
+      <div class="section-header">
+        <h2>Contatti</h2>
+      </div>
+      <div class="contatti-grid">
+        <div class="contatti-info">
+          <p>
+            Hai una segnalazione, una notizia da raccontare, o vuoi semplicemente confrontarti su un tema? Scrivimi. Ogni voce conta.
+          </p>
+          <ul class="contact-links">
+            <li>✉ <a href="/cdn-cgi/l/email-protection#7910171f16390b181d10161516171d0b1857100d"><span class="__cf_email__" data-cfemail="b1d8dfd7def1c3d0d5d8dedddedfd5c3d09fd8c5">[radiolondraeditor@protonmail.com]</span></a></li>
+            <li>𝕏 <a href="#">@radiolondra</a></li>
+          </ul>
+        </div>
+        <div class="contact-form">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" placeholder="Il tuo nome">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="la-tua@email.it">
+          </div>
+          <div class="form-group">
+            <label for="messaggio">Messaggio</label>
+            <textarea id="messaggio" placeholder="Scrivi qui..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="alert('Messaggio inviato! Ti rispondo presto.')">Invia messaggio</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-title">Radio<span> Londra</span></div>
+    <p>Diritto, politica e pensiero critico &nbsp;·&nbsp; Tutti i diritti riservati &nbsp;·&nbsp; <span id="footer-year"></span></p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Live date in top bar and nav
+    const now = new Date();
+    const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = now.toLocaleDateString('it-IT', opts);
+    document.getElementById('live-date').textContent = dateStr;
+    document.getElementById('nav-date').textContent = dateStr;
+    document.getElementById('footer-year').textContent = now.getFullYear();
+
+    // Smooth scroll active link highlighting
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.for

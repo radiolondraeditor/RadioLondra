@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>La separazione delle carriere — Radio Londra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0f0f;
+      --paper: #f4f0e8;
+      --cream: #ede8dc;
+      --accent: #c0392b;
+      --gray: #888;
+      --light-gray: #d8d3c8;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lora', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 40px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color .2s;
+      padding: 16px 0;
+      display: block;
+    }
+
+    .nav-back:hover { color: var(--accent); }
+
+    /* ── ARTICLE HEADER ── */
+    .article-header {
+      max-width: 760px;
+      margin: 56px auto 0;
+      padding: 0 40px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .article-category {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+
+    .article-title em { font-style: italic; color: var(--accent); }
+
+    .article-subtitle {
+      font-family: var(--font-body);
+      font-size: 19px;
+      font-style: italic;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray);
+      padding: 16px 0;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+      margin-bottom: 48px;
+    }
+
+    .meta-dot { color: var(--light-gray); }
+
+    /* ── ARTICLE BODY ── */
+    .article-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .article-body p {
+      font-size: 17px;
+      line-height: 1.85;
+      color: #222;
+      margin-bottom: 24px;
+    }
+
+    /* Drop cap sul primo paragrafo */
+    .article-body p:first-of-type::first-letter {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 900;
+      float: left;
+      line-height: 0.8;
+      margin: 6px 10px 0 0;
+      color: var(--accent);
+    }
+
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      margin: 44px 0 16px;
+      color: var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 10px;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 700;
+      margin: 32px 0 12px;
+      color: var(--ink);
+    }
+
+    /* Citazione in evidenza */
+    .article-body blockquote {
+      background: var(--cream);
+      border-left: 4px solid var(--accent);
+      margin: 36px 0;
+      padding: 24px 28px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .article-body blockquote cite {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-style: normal;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    /* Nota a piè di paragrafo */
+    .article-body .nota {
+      background: var(--cream);
+      border: 1px solid var(--light-gray);
+      padding: 14px 18px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray);
+      margin: 28px 0;
+      line-height: 1.6;
+    }
+
+    .article-body .nota strong {
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 10px;
+    }
+
+    /* Tag finali */
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--light-gray);
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      transition: all .2s;
+      cursor: default;
+    }
+
+    .tag:hover { background: var(--ink); color: var(--paper); }
+
+    /* ── BACK BAND ── */
+    .back-band {
+      background: var(--ink);
+      padding: 32px 40px;
+      text-align: center;
+      border-top: 3px solid var(--accent);
+    }
+
+    .back-band a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--paper);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+      transition: color .2s;
+    }
+
+    .back-band a:hover { color: var(--accent); }
+
+    .back-band p {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--paper);
+      margin-bottom: 12px;
+    }
+
+    .back-band p span { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .top-bar { display: none; }
+      nav, .article-header, .article-body { padding-left: 20px; padding-right: 20px; }
+      .article-header { margin-top: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span id="live-date"></span>
+    <span>Radio Londra</span>
+    <span>Italia</span>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Radio<span> Londra</span></a>
+      <a href="index.html" class="nav-back">← Torna agli articoli</a>
+    </div>
+  </nav>
+
+  <!-- ARTICLE HEADER -->
+  <header class="article-header">
+    <span class="article-category">Riforma della Giustizia</span>
+    <h1 class="article-title">La separazione delle carriere: <em>rivoluzione</em> o propaganda?</h1>
+    <p class="article-subtitle">
+      Il disegno di legge costituzionale è diventato legge. Ma cosa cambia davvero per il cittadino? Un'analisi senza filtri, con gli occhi di chi conosce i meccanismi dall'interno.
+    </p>
+    <div class="article-meta">
+      <span>10 Marzo 2026</span>
+      <span class="meta-dot">·</span>
+      <span>8 min di lettura</span>
+      <span class="meta-dot">·</span>
+      <span>Categoria: Giustizia</span>
+    </div>
+  </header>
+
+  <!-- ARTICLE BODY -->
+  <!-- ✏️ ZONA ARTICOLO: sostituisci il testo qui sotto con il tuo contenuto -->
+  <article class="article-body">
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    </p>
+
+    <p>
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et tempus feugiat. Nullam varius turpis vitae mi placerat, in tincidunt nunc accumsan. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+    </p>
+
+    <h2>Il contesto normativo</h2>
+
+    <p>
+      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Proin vel ante a orci tempus eleifend ut et magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta.
+    </p>
+
+    <blockquote>
+      "Nemo iudex in causa sua. Un principio antico che la riforma sembra dimenticare con disinvoltura."
+      <cite>— Riflessione dell'autore</cite>
+    </blockquote>
+
+    <p>
+      Sed commodo posuere pede. Mauris ut est. Ut quis purus. Sed ac odio. Sed vehicula hendrerit sem. Duis non odio. Morbi ut dui. Sed accumsan risus eget odio. In hac habitasse platea dictumst. Pellentesque non elit. Fusce sed justo eu urna porta tincidunt. Mauris elit nulla, pretium sed, aliquam nec, nonummy ut, erat.
+    </p>
+
+    <div class="nota">
+      <strong>Nota dell'autore</strong><br>
+      Questo articolo riflette l'opinione personale dell'autore basata sulla propria esperienza professionale. Non costituisce parere legale.
+    </div>
+
+    <h2>Le implicazioni pratiche</h2>
+
+    <p>
+      Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.
+    </p>
+
+    <h3>Il ruolo del pubblico ministero</h3>
+
+    <p>
+      Nullam varius, turpis molestie pretium suscipit, quam urna congue purus, vitae placerat tortor mi a arcu. Cras lobortis sem ut augue ultrices calendar. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie augue sit amet leo consequat posuere.
+    </p>
+
+    <p>
+      Vestibulum pretium tortor vel risus interdum pellentesque. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend.
+    </p>
+
+    <h3>Il punto di vista della difesa</h3>
+
+    <p>
+      Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien. Donec ut est in lectus consequat consequat.
+    </p>
+
+    <blockquote>
+      "La giustizia non è solo tecnica: è fiducia. E la fiducia si costruisce con la trasparenza, non con le riforme calate dall'alto."
+      <cite>— Radio Londra</cite>
+    </blockquote>
+
+    <h2>Conclusioni</h2>
+
+    <p>
+      Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien.
+    </p>
+
+    <p>
+      Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac dui quis mi consectetuer lacinia.
+    </p>
+
+    <!-- TAG ARTICOLO -->
+    <div class="article-tags">
+      <span class="tag">Giustizia</span>
+      <span class="tag">Riforma</span>
+      <span class="tag">Magistratura</span>
+      <span class="tag">Costituzione</span>
+      <span class="tag">CSM</span>
+    </div>
+
+  </article>
+  <!-- ✏️ FINE ZONA ARTICOLO -->
+
+  <!-- BACK BAND -->
+  <div class="back-band">
+    <p>Radio<span> Londra</span></p>
+    <a href="index.html">← Torna a tutti gli articoli</a>
+  </div>
+
+  <script>
+    const now = new Date();
+    const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('live-date').textContent = now.toLocaleDateString('it-IT', opts);
+  </script>
+
+</body>
+</html>
