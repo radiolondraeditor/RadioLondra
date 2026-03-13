@@ -542,7 +542,7 @@
       <h1 class="site-title">Radio<span> Londra</span></h1>
       <p class="site-tagline">Diritto &nbsp;·&nbsp; Politica &nbsp;·&nbsp; Pensiero Critico</p>
       <div class="header-rule">
-        <span>Est. 2026</span>
+        <span>Est. 03/2026</span>
       </div>
     </div>
   </header>
@@ -669,9 +669,18 @@
     document.getElementById('footer-year').textContent = now.getFullYear();
 
     // Smooth scroll active link highlighting
-    const sections = document.querySelectorAll('section[id], div[id]');
+    const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
-
+ 
     window.addEventListener('scroll', () => {
       let current = '';
-      sections.for
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+</html>
