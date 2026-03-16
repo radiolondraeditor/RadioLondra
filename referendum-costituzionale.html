@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Referendum Costituzionale — Radio Londra</title>
+  <meta name="description" content="Cosa andremo a votare? L'attuale assetto della giustizia, le proposte di modifica e le conseguenze che potranno derivare dall'approvazione del disegno di legge costituzionale.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0f0f;
+      --paper: #f4f0e8;
+      --cream: #ede8dc;
+      --accent: #c0392b;
+      --gray: #888;
+      --light-gray: #d8d3c8;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lora', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 40px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color .2s;
+      padding: 16px 0;
+      display: block;
+    }
+
+    .nav-back:hover { color: var(--accent); }
+
+    /* ── ARTICLE HEADER ── */
+    .article-header {
+      max-width: 760px;
+      margin: 56px auto 0;
+      padding: 0 40px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .article-category {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+
+    .article-subtitle {
+      font-family: var(--font-body);
+      font-size: 19px;
+      font-style: italic;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray);
+      padding: 16px 0;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+      margin-bottom: 48px;
+    }
+
+    .meta-dot { color: var(--light-gray); }
+
+    /* ── ARTICLE BODY ── */
+    .article-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .article-body p {
+      font-size: 17px;
+      line-height: 1.85;
+      color: #222;
+      margin-bottom: 24px;
+    }
+
+    .article-body p:first-of-type::first-letter {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 900;
+      float: left;
+      line-height: 0.8;
+      margin: 6px 10px 0 0;
+      color: var(--accent);
+    }
+
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      margin: 48px 0 16px;
+      color: var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 10px;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 700;
+      margin: 36px 0 12px;
+      color: var(--ink);
+    }
+
+    .article-body blockquote {
+      background: var(--cream);
+      border-left: 4px solid var(--accent);
+      margin: 36px 0;
+      padding: 24px 28px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .article-body blockquote cite {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-style: normal;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    /* Elenchi puntati */
+    .article-body ul {
+      margin: 0 0 24px 24px;
+      list-style: none;
+    }
+
+    .article-body ul li {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #222;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .article-body ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    /* Box normativa */
+    .nota {
+      background: var(--cream);
+      border: 1px solid var(--light-gray);
+      border-left: 3px solid var(--ink);
+      padding: 18px 22px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #555;
+      margin: 32px 0;
+      line-height: 1.7;
+    }
+
+    .nota strong {
+      display: block;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* Box voto finale */
+    .voto-band {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 32px 36px;
+      margin: 48px 0;
+      text-align: center;
+    }
+
+    .voto-band p {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--paper) !important;
+      margin-bottom: 0 !important;
+      line-height: 1.4;
+    }
+
+    .voto-band p span {
+      color: var(--accent);
+    }
+
+    /* Tag finali */
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--light-gray);
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      transition: all .2s;
+      cursor: default;
+    }
+
+    .tag:hover { background: var(--ink); color: var(--paper); }
+
+    /* Riferimenti normativi */
+    .riferimenti {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--light-gray);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .riferimenti strong {
+      display: block;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* ── BACK BAND ── */
+    .back-band {
+      background: var(--ink);
+      padding: 32px 40px;
+      text-align: center;
+      border-top: 3px solid var(--accent);
+    }
+
+    .back-band a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--paper);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+      transition: color .2s;
+    }
+
+    .back-band a:hover { color: var(--accent); }
+
+    .back-band p {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--paper);
+      margin-bottom: 12px;
+    }
+
+    .back-band p span { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .top-bar { display: none; }
+      nav, .article-header, .article-body { padding-left: 20px; padding-right: 20px; }
+      .article-header { margin-top: 32px; }
+      .voto-band { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span id="live-date"></span>
+    <span>Radio Londra</span>
+    <span>Italia</span>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Radio<span> Londra</span></a>
+      <a href="index.html" class="nav-back">← Torna agli articoli</a>
+    </div>
+  </nav>
+
+  <!-- ARTICLE HEADER -->
+  <header class="article-header">
+    <span class="article-category">Riforma della Giustizia</span>
+    <h1 class="article-title">Referendum Costituzionale</h1>
+    <p class="article-subtitle">
+      Cosa andremo a votare? L'attuale assetto della giustizia, le proposte di modifica e le conseguenze che potranno derivare dall'approvazione del disegno di legge costituzionale.
+    </p>
+    <div class="article-meta">
+      <span>16 Marzo 2026</span>
+      <span class="meta-dot">·</span>
+      <span>30 min di lettura</span>
+      <span class="meta-dot">·</span>
+      <span>Giustizia · Costituzione</span>
+    </div>
+  </header>
+
+  <!-- ARTICLE BODY -->
+  <article class="article-body">
+
+    <h2>Il testo referendario</h2>
+
+    <p>
+      Nella Gazzetta Ufficiale n. 10 del 14 gennaio 2026 è stato pubblicato il decreto del Presidente della Repubblica del 13 gennaio 2026 con il quale è stato indetto, per i giorni 22 e 23 marzo 2026, il referendum popolare confermativo della legge costituzionale recante: «Norme in materia di ordinamento giurisdizionale e di istituzione della Corte disciplinare», approvata dal Parlamento e pubblicata nella Gazzetta Ufficiale della Repubblica italiana n. 253 del 30 ottobre 2025.
+    </p>
+
+    <p>
+      Il testo del quesito referendario, come riformulato dal D.P.R. 7 febbraio 2026, è il seguente:
+    </p>
+
+    <blockquote>
+      «Approvate il testo della legge di revisione degli artt. 87, decimo comma, 102, primo comma, 104, 105, 106, terzo comma, 107, primo comma, e 110 della Costituzione approvata dal Parlamento e pubblicata nella Gazzetta Ufficiale del 30 ottobre 2025 con il titolo "Norme in materia di ordinamento giurisdizionale e di istituzione della Corte disciplinare"?»
+    </blockquote>
+
+    <h2>Le modifiche costituzionali</h2>
+
+    <p>
+      La Costituzione italiana è suddivisa in titoli, ognuno dei quali raccoglie una serie di articoli dedicati a una specifica materia. Il disegno di riforma prevede la modifica dell'art. 87 (Titolo II – Il Presidente della Repubblica) e degli artt. 102, 104, 105, 106, 107 e 110 (Titolo IV – La Magistratura).
+    </p>
+
+    <p>Vediamo le modifiche una per una:</p>
+
+    <ul>
+      <li><strong>Art. 87, comma 10:</strong> il Presidente della Repubblica presiederà non più uno, ma due Consigli Superiori della Magistratura (CSM): quello giudicante e quello requirente.</li>
+      <li><strong>Art. 102, comma 1:</strong> viene formalizzata la distinzione tra la carriera dei magistrati giudicanti (i giudici) e quella dei magistrati requirenti (i pubblici ministeri).</li>
+      <li><strong>Art. 104:</strong> la composizione del CSM cambia in modo significativo. Con la riforma, i componenti dei due nuovi CSM saranno estratti a sorte: un terzo tra i magistrati giudicanti, un terzo tra i magistrati requirenti e un terzo da un elenco di professori universitari e avvocati con almeno quindici anni di esperienza, compilato dal Parlamento in seduta comune entro sei mesi dall'insediamento.</li>
+      <li><strong>Art. 105:</strong> viene istituita l'Alta Corte disciplinare, un nuovo organo che sottrae al CSM il potere di giudicare i magistrati in sede disciplinare. L'Alta Corte è composta da quindici giudici, tra cui tre nominati dal Presidente della Repubblica, tre estratti a sorte da un elenco compilato dal Parlamento, tre magistrati giudicanti e tre requirenti estratti a sorte, e tre eletti dal Parlamento in seduta comune.</li>
+      <li><strong>Artt. 106 comma 3, 107 comma 1 e 110:</strong> si tratta di norme di coordinamento tecnico, necessarie per rendere il testo costituzionale coerente con la nuova distinzione tra le due carriere.</li>
+    </ul>
+
+    <p>In sintesi, le tre grandi novità introdotte dalla riforma sono:</p>
+
+    <ul>
+      <li>La separazione definitiva delle carriere tra giudici e pubblici ministeri.</li>
+      <li>La trasformazione del CSM in due organi distinti, i cui componenti saranno in larga parte estratti a sorte.</li>
+      <li>La creazione dell'Alta Corte disciplinare, che assume il potere di giudicare i magistrati sul piano disciplinare, sottraendolo al CSM.</li>
+    </ul>
+
+    <h2>Come funziona oggi la giustizia</h2>
+
+    <p>
+      È un'ardua impresa descrivere il funzionamento della giustizia in un solo articolo, ma non è possibile valutare le modifiche di un sistema senza prima conoscerlo. Si tenterà pertanto, in queste pagine, di illustrarne il funzionamento complessivo, con le necessarie semplificazioni, ma senza tradire il senso reale di come opera la macchina giudiziaria.
+    </p>
+
+    <h3>La notizia di reato</h3>
+
+    <p>
+      In ambito penale tutto ha origine da una notizia di reato (in latino: <em>notitia criminis</em>), ovvero dall'informazione che un reato potrebbe essere stato commesso [art. 335 c.p.p.]. Essa può provenire da tre fonti principali: da un privato cittadino, anche anonimo, mediante denuncia, querela o esposto; da un'attività di indagine condotta autonomamente dalle forze di polizia [art. 347 c.p.p.]; da notizie apparse su giornali, televisione, social network o altri mezzi di comunicazione.
+    </p>
+
+    <h3>Il ruolo della Procura della Repubblica e del Pubblico Ministero</h3>
+
+    <p>
+      Quando la Procura della Repubblica riceve una notizia di reato, il Pubblico Ministero (PM) — di norma un sostituto procuratore — ha l'obbligo di iscriverla in un apposito registro [art. 335 c.p.p.]. Il più noto è il cosiddetto "Mod. 21", il registro degli indagati noti, spesso citato nelle cronache giudiziarie.
+    </p>
+
+    <p>
+      A questo punto il PM avvia le indagini preliminari, adottando tutte le iniziative che ritiene opportune per accertare se il reato sia stato commesso e, in caso affermativo, da chi. Vista la mole di lavoro, nella maggior parte dei casi il PM si avvale della Polizia Giudiziaria, che non è un corpo separato rispetto alle ordinarie forze dell'ordine, bensì una funzione attribuita dalla legge ai loro appartenenti per lo svolgimento di specifiche attività investigative.
+    </p>
+
+    <h3>L'obbligatorietà dell'azione penale</h3>
+
+    <p>
+      Principio fondamentale: il Pubblico Ministero ha l'obbligo di esercitare l'azione penale ogni volta che riceve una notizia di reato. Non si tratta di una facoltà discrezionale, ma di un dovere sancito dalla Costituzione [art. 112 Cost.].
+    </p>
+
+    <p>
+      Questo significa che, a differenza di quanto avviene in altri ordinamenti — basti pensare agli Stati Uniti, dove il procuratore distrettuale sceglie discrezionalmente se procedere o meno — in Italia non è consentito ignorare un reato per ragioni di opportunità politica, economica o di qualsiasi altra natura. Se arriva una notizia di reato, il PM deve iscriverla e avviare le indagini.
+    </p>
+
+    <p>
+      Il principio dell'obbligatorietà riflette una precisa scelta del Costituente: garantire che la legge penale sia applicata in modo uguale per tutti i cittadini, senza che il singolo magistrato possa scegliere di perseguire alcune persone e non altre in base a simpatie, pressioni o convenienze. È una delle garanzie fondamentali dello Stato di diritto.
+    </p>
+
+    <h3>Le indagini preliminari e il ruolo del GIP</h3>
+
+    <p>
+      Il PM conduce le indagini preliminari [artt. 326–415 c.p.p.] e, al termine di esse, decide se richiedere il rinvio a giudizio oppure l'archiviazione. La presenza costante del Giudice per le Indagini Preliminari (GIP) [art. 328 c.p.p.] è una garanzia ulteriore: è un magistrato terzo, distinto dal PM, che autorizza gli atti più invasivi — come le intercettazioni telefoniche [art. 267 c.p.p.], i sequestri [artt. 253–262 c.p.p.], le misure cautelari personali [artt. 272–315 c.p.p.] — e vigila sull'operato del PM anche a tutela dell'indagato, talvolta persino prima che quest'ultimo sappia di essere sotto indagine.
+    </p>
+
+    <h3>L'archiviazione</h3>
+
+    <p>
+      L'obbligo di iscrivere la notizia di reato e di avviare le indagini non implica che ogni procedimento debba necessariamente concludersi con un processo. Quando, al termine delle indagini preliminari, il PM ritiene di non disporre di elementi sufficienti per sostenere l'accusa in giudizio, può chiedere l'archiviazione al GIP [art. 408 c.p.p.]. Le cause più frequenti sono:
+    </p>
+
+    <ul>
+      <li>il fatto non sussiste;</li>
+      <li>il fatto non è previsto dalla legge come reato;</li>
+      <li>il reato è prescritto;</li>
+      <li>l'autore è ignoto e le indagini non hanno consentito di identificarlo;</li>
+      <li>gli elementi raccolti sono insufficienti a sostenere l'accusa in giudizio [art. 125 disp. att. c.p.p.].</li>
+    </ul>
+
+    <p>
+      È importante precisare che l'archiviazione non è una sentenza di assoluzione: non stabilisce l'innocenza dell'indagato, ma solo l'assenza di elementi sufficienti a procedere oltre. Il GIP può accogliere la richiesta del PM o, qualora ritenga le indagini incomplete, rigettarla e disporre lo svolgimento di ulteriori accertamenti — le cosiddette indagini coatte [art. 409 c.p.p.].
+    </p>
+
+    <h3>Il PM come parte pubblica</h3>
+
+    <p>
+      Nel processo penale il Pubblico Ministero siede al lato dell'accusa: è lui a raccogliere gli elementi di prova, a formulare l'imputazione e a sostenere in aula la tesi accusatoria. In questo senso tecnico, è una "parte" del processo. Sarebbe tuttavia un errore assimilarlo a un avvocato dell'accusa. Il PM è una parte pubblica: agisce nell'interesse della collettività, non di un privato.
+    </p>
+
+    <p>
+      Il Pubblico Ministero ha l'obbligo, espressamente sancito dalla legge, di svolgere indagini non solo a carico dell'indagato, ma anche a suo favore [art. 358 c.p.p.]. Se nel corso delle indagini emergono elementi che depongono per l'innocenza della persona, il PM ha il dovere di raccoglierli e valorizzarli, anche se ciò significa richiedere l'archiviazione o non sostenere l'accusa in giudizio.
+    </p>
+
+    <h3>PM e avvocato difensore: ruoli diversi, logiche diverse</h3>
+
+    <p>
+      L'avvocato difensore rappresenta e tutela gli interessi del proprio assistito. Il suo mandato è parziale per definizione: deve fare tutto ciò che è lecito per proteggere il cliente, anche qualora fosse colpevole. La sua lealtà è verso l'assistito [art. 6 cod. deont. forense], non verso la verità processuale in astratto.
+    </p>
+
+    <p>
+      Il Pubblico Ministero non ha un "cliente" da difendere. Rappresenta lo Stato e, attraverso di esso, la comunità. Non è remunerato da chi ha interesse a vedere condannato l'imputato; è un funzionario pubblico il cui compito è applicare la legge nell'interesse generale. Equiparare il PM all'avvocato significherebbe legittimare la possibilità che egli occulti prove favorevoli all'indagato o ricorra a cavilli procedurali per ottenere una condanna al di fuori di un accertamento genuino della responsabilità.
+    </p>
+
+    <p>
+      La prova si forma in dibattimento [art. 526 c.p.p.], attraverso il contraddittorio tra le parti davanti al giudice [art. 111, comma 4 Cost.]. È per questo che i verbali e le annotazioni della Polizia Giudiziaria, pur essendo atti delle indagini, vengono verificati in aula mediante l'esame diretto dei testimoni.
+    </p>
+
+    <h2>La Polizia Giudiziaria e la sua dipendenza funzionale</h2>
+
+    <p>
+      Una peculiarità significativa del nostro ordinamento è la disciplina della Polizia Giudiziaria (P.G.), che vale la pena approfondire perché costituisce uno dei pilastri delle garanzie offerte ai cittadini.
+    </p>
+
+    <p>
+      Le forze di polizia in Italia sono la Polizia di Stato, i Carabinieri, la Guardia di Finanza e la Polizia Penitenziaria. Ciascuna risponde, per la propria gestione ordinaria, a un diverso ministero. Il ministero è espressione del potere esecutivo e opera secondo le linee politiche della maggioranza di governo.
+    </p>
+
+    <p>
+      Quando invece gli appartenenti alle forze di polizia esercitano i poteri di P.G. — ovvero operano nella repressione di reati — dipendono esclusivamente dall'Autorità Giudiziaria [artt. 56 e 109 Cost.; art. 56 c.p.p.], che impartisce le direttive. Si tratta della cosiddetta <em>dipendenza funzionale</em>: la gestione del personale resta alle singole forze di polizia, ma le attività investigative vengono svolte solo su indicazione o su richiesta della A.G.
+    </p>
+
+    <p>
+      Nello svolgimento delle funzioni di P.G., le forze di polizia hanno l'obbligo di non riferire ai propri vertici gerarchici [art. 36 disp. att. c.p.p.]. Ciò significa che nessuno — dal semplice cittadino al Presidente della Repubblica, passando per ministri e Presidente del Consiglio — ha il diritto di essere informato sullo stato delle indagini. Questa impermeabilità è la garanzia concreta dell'indipendenza delle indagini stesse.
+    </p>
+
+    <blockquote>
+      Tale indipendenza rischierebbe di essere irrimediabilmente compromessa qualora il Pubblico Ministero dovesse un giorno rispondere al Ministero della Giustizia, ovvero a un organo espressione del potere esecutivo.
+    </blockquote>
+
+    <h2>L'appartenenza al medesimo ordine</h2>
+
+    <p>
+      Questo referendum viene presentato dai sostenitori del "sì" come risolutivo rispetto al problema della parzialità del giudice, facendo leva su una propensione logica apparentemente intuitiva: se da un lato vi è l'accusa e dall'altro vi è la difesa, sembrebbe ragionevole che il giudice non condivida l'ordine con l'accusa.
+    </p>
+
+    <p>
+      Ciò che tuttavia viene sistematicamente trascurato — a volte di proposito, a volte per semplicità espositiva — è che in Italia il PM non rappresenta l'accusa nel senso privatistico del termine. Il PM è parte pubblica, il cui compito è sostenere la ricerca della verità in ogni fase del procedimento: porta avanti l'accusa soltanto quando la ritiene fondata e supportata dagli elementi raccolti.
+    </p>
+
+    <p>
+      PM e giudici operano a fini di giustizia nell'interesse pubblico; l'avvocato opera nell'interesse privato, svolgendo un ruolo essenziale e pienamente riconosciuto dall'ordinamento. Non si tratta di ruoli opposti o antagonisti: sono ruoli complementari, ciascuno indispensabile al funzionamento del sistema.
+    </p>
+
+    <p>
+      Equiparare il PM all'avvocato — o renderlo culturalmente e professionalmente simile a un "avvocato dell'accusa" — significherebbe legittimare la possibilità che egli occulti prove favorevoli all'indagato o utilizzi cavilli procedurali per ottenere una condanna al di là di un genuino accertamento della responsabilità. Significherebbe, in altri termini, trasformare lo Stato in una parte come le altre.
+    </p>
+
+    <h2>Il rapporto tra potere esecutivo e potere giudiziario</h2>
+
+    <p>
+      E allora, quale è il ruolo del Ministero della Giustizia? La sua funzione è garantire il funzionamento dell'intero apparato che consente ai magistrati di lavorare: il personale amministrativo (cancellieri, assistenti), la manutenzione delle strutture fisiche dei tribunali e delle procure, e la predisposizione di proposte di riforma legislativa.
+    </p>
+
+    <p>
+      Il potere esecutivo non ha quindi la possibilità di intervenire direttamente sulle indagini o sui processi, ma può incidere significativamente sulle condizioni in cui essi si svolgono, attraverso la gestione del personale, delle risorse e del quadro normativo.
+    </p>
+
+    <p>
+      Una riduzione del personale nei tribunali, l'abrogazione di un reato — come è avvenuto con la soppressione dell'abuso d'ufficio [d.lgs. n. 24/2024] — o la carente formazione del personale di P.G. possono compromettere o migliorare il lavoro dei magistrati senza che formalmente venga toccata la loro indipendenza.
+    </p>
+
+    <h2>Il nocciolo della questione</h2>
+
+    <p>
+      Il fronte del "sì" presenta la riforma come necessaria per rendere "la giustizia più giusta". Il Presidente del Consiglio ha affermato che essa consentirà di perseguire crimini e criminali che fino a oggi l'avrebbero "fatta franca". Le parole esatte, rilasciate al quotidiano Il Giornale il 13 marzo 2026, sono emblematiche:
+    </p>
+
+    <blockquote>
+      «Se vince il No avremo correnti ancora più potenti, magistrati ancora più negligenti che fanno carriera, immigrati illegali, stupratori, pedofili, spacciatori rimessi in libertà, antagonisti che devastano le stazioni senza conseguenze, milioni di euro risarciti per ingiusta detenzione o spesi per processi mediatici e inutili pagati dalle tasse, figli strappati alle madri perché i giudici non condividono il loro stile di vita se vivono in un bosco mentre nulla si fa per i bambini mandati a rubare o a fare accattonaggio...»
+      <cite>— Presidente del Consiglio, Il Giornale, 13 marzo 2026</cite>
+    </blockquote>
+
+    <p>Secondo i sostenitori del "sì", la riforma garantirà inoltre un trattamento più equo per gli indagati. In sintesi, i sostenitori del "sì" promettono:</p>
+
+    <ul>
+      <li>Magistrati più capaci e motivati, in grado di colpire reati e criminali con maggiore efficacia.</li>
+      <li>Parità tra PM e avvocato difensore.</li>
+      <li>Eliminazione delle correnti politiche interne alla magistratura, generate dal sistema elettivo, con i relativi rischi di scambi di favori e condizionamenti nell'esercizio della funzione disciplinare.</li>
+    </ul>
+
+    <p>
+      Gli obiettivi dichiarati dalla riforma sono in sé condivisibili. Le modalità scelte per raggiungerli, tuttavia, appaiono incoerenti rispetto alle premesse.
+    </p>
+
+    <p>
+      Se si è compreso come funziona il meccanismo giudiziario, risulta evidente che la divisione delle carriere non può creare imparzialità, perché l'imparzialità non è in discussione quando i soggetti coinvolti svolgono correttamente il proprio ruolo. Nella fisiologia del processo, PM e giudice perseguono il medesimo fine — la ricerca della verità — ricoprendo funzioni diverse.
+    </p>
+
+    <p>
+      Non ha senso strutturale scindere PM e giudice; ha senso, invece, metterli in condizioni di operare efficacemente: norme processuali chiare, un apparato di supporto adeguato in termini di numero e qualità (P.G., personale di cancelleria, segreterie), risorse sufficienti.
+    </p>
+
+    <p>
+      La garanzia per l'indagato non sta nell'impedire che PM e GIP si incrocino nei corridoi del palazzo di giustizia. La garanzia reale risiede in una giustizia che funziona: celere, efficace, capace di archiviare rapidamente le posizioni degli innocenti e di procedere speditamente nei confronti dei colpevoli.
+    </p>
+
+    <p>
+      E Giovanni Falcone, che non era contrario alla divisione delle carriere? Vale la pena ricordare che Falcone si esprimeva in un contesto storico radicalmente diverso, oltre trent'anni fa. Avrebbe avuto il diritto di replica, ma scelse di dare la propria vita. Non può più farlo. È lecito domandarsi se sarebbe opportuno che a farlo siano, oggi, coloro che ne utilizzano il nome a proprio vantaggio.
+    </p>
+
+    <h2>In conclusione</h2>
+
+    <p>
+      Siamo chiamati a esprimerci su un argomento estremamente complesso e delicato, che va ben oltre la modifica di una manciata di articoli costituzionali. La riforma viene presentata come una medicina miracolosa capace di garantire giustizia contro i colpevoli e assoluzioni certe per gli innocenti, ignorando — o fingendo di ignorare — il funzionamento reale del meccanismo su cui intende intervenire.
+    </p>
+
+    <p>
+      La politica e i cittadini dovrebbero assumersi la responsabilità delle proprie scelte, delle proprie parole e delle proprie posizioni. Comprendere che quella matita sul foglio è il risultato più alto di un'Italia che fu capace di tornare alle urne: una garanzia che non è assicurata da nessuna forza sovrumana, ma dalla volontà collettiva di mantenerla.
+    </p>
+
+    <p>
+      Il voto del 22 e 23 marzo non dovrà essere un voto politico nel senso contingente del termine: il suo scopo non è sostenere o contrastare un governo, ma decidere se mantenere o abbandonare la scelta del legislatore costituente di tenere la magistratura autonoma e impermeabile alle ingerenze del potere politico.
+    </p>
+
+    <p>
+      Magistrati che si comportano in maniera scorretta esistono e probabilmente esisteranno sempre — il caso Palamara lo insegna. Ma il metodo per contrastare questi fenomeni non è smantellare il meccanismo di garanzia: è garantirne il funzionamento, riconoscerne le carenze e presentare ai cittadini la situazione per quella che è, senza vendere la soluzione di ogni problema attraverso un'estrazione a sorte e una separazione delle carriere.
+    </p>
+
+    <div class="voto-band">
+      <p>Ove mai non fosse chiaro al lettore: <span>Radio Londra voterà no.</span></p>
+    </div>
+
+    <!-- RIFERIMENTI NORMATIVI -->
+    <div class="riferimenti">
+      <strong>Riferimenti normativi citati nel testo</strong>
+      Cost. = Costituzione della Repubblica Italiana; c.p.p. = Codice di procedura penale; cod. deont. forense = Codice deontologico forense (approvato dal CNF il 31 gennaio 2014); disp. att. c.p.p. = Norme di attuazione del codice di procedura penale (d.lgs. n. 271/1989).
+    </div>
+
+    <!-- TAG -->
+    <div class="article-tags">
+      <span class="tag">Giustizia</span>
+      <span class="tag">Referendum</span>
+      <span class="tag">Costituzione</span>
+      <span class="tag">Magistratura</span>
+      <span class="tag">Separazione delle carriere</span>
+      <span class="tag">CSM</span>
+      <span class="tag">Pubblico Ministero</span>
+    </div>
+
+  </article>
+
+  <!-- BACK BAND -->
+  <div class="back-band">
+    <p>Radio<span> Londra</span></p>
+    <a href="index.html">← Torna a tutti gli articoli</a>
+  </div>
+
+  <script>
+    const now = new Date();
+    const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('live-date').textContent = now.toLocaleDateString('it-IT', opts);
+  </script>
+
+</body>
+</html>
